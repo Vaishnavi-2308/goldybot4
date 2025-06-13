@@ -14,9 +14,9 @@ Pull the LLM - `ollama pull qwen3:1.7b` and `ollama pull nomic-embed-text`.
 
 server - `uvicorn server:app --reload`
 
-CLI client - `python client-cli.py`
-
 Streamlit client - `streamlit run client-streamlit.py`
+
+Optionally run `langgraph dev` for the langgraph server
 
 ### References
 

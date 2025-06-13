@@ -15,6 +15,7 @@ dependencies = [
     "langchain-ollama>=0.3.3",
     "langgraph>=0.4.8",
     "langgraph-checkpoint-sqlite>=2.0.10",
+    "langgraph-cli[inmem,inmen]>=0.3.1",
     "langgraph-prebuilt>=0.2.2",
     "langgraph-supervisor>=0.0.27",
     "praw>=7.8.1",

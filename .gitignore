@@ -15,3 +15,5 @@ wheels/
 
 knowledge_base/
 user_profiles/
+
+.langgraph_api/

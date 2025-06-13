@@ -5,13 +5,15 @@ from typing import Dict
 from goldybot import GoldyBot  # Assuming GoldyBot is defined elsewhere and imported here
 import os
 from dotenv import load_dotenv
-from langsmith import traceable
+#from langsmith import traceable
 
 load_dotenv()
 os.environ['LANGSMITH_PROJECT'] = os.path.basename(os.path.dirname(__file__))
 
 app = FastAPI()
 bot = GoldyBot()  # Global instance
+
+graph_ref = bot.app
 
 # Store active connections per user
 class ConnectionManager:
@@ -33,8 +35,8 @@ class ConnectionManager:
 manager = ConnectionManager()
 
 
+#@traceable
 @app.websocket("/ws/{user_id}")
-@traceable
 async def websocket_endpoint(websocket: WebSocket, user_id: str):
     await manager.connect(user_id, websocket)
     try:

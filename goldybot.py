@@ -24,14 +24,18 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 # LangGraph dependencies
 from langgraph.graph import StateGraph, END
 # from langgraph.prebuilt import ToolExecutor
-from langgraph.checkpoint.memory import MemorySaver
+# from langgraph.checkpoint.memory import MemorySaver
+
+## Langsmith
+from langsmith import traceable 
+from langchain.callbacks.tracers.langchain import LangChainTracer
 
 # Utility imports
 import chromadb
 from chromadb.config import Settings
 
 load_dotenv()
-os.environ['LANGSMITH_PROJECT'] = os.path.dirname(__file__)
+os.environ['LANGSMITH_PROJECT'] = os.path.basename(os.path.dirname(__file__))
 
 class KnowledgeBase:
     """Simple persistent vector store using Chroma"""
@@ -207,10 +211,11 @@ class GoldyBot:
         
         # Initialize the graph
         self.graph = self._create_graph()
-        self.memory = MemorySaver()
+        # self.memory = MemorySaver()
         
         # Compile the graph
-        self.app = self.graph.compile(checkpointer=self.memory)
+        # self.app = self.graph.compile(checkpointer=self.memory)
+        self.app = self.graph.compile()
     
     def _create_graph(self) -> StateGraph:
         """Create the LangGraph workflow"""
@@ -491,6 +496,7 @@ class GoldyBot:
             self.user_profiles[user_id] = UserProfile(user_id)
         return self.user_profiles[user_id]
     
+    @traceable
     async def chat(self, message: str, user_id: str = None) -> str:
         """Main chat interface"""
         if user_id is None:
@@ -511,8 +517,12 @@ class GoldyBot:
             user_info_extracted=None
         )
         
+
+        tracer = LangChainTracer()
+
         # Run the graph
-        config = {"configurable": {"thread_id": user_id}}
+        # config = {"configurable": {"thread_id": user_id}}
+        config = {"configurable": {"thread_id": user_id}, "callbacks": [tracer]}
         
         try:
             final_state = await self.app.ainvoke(initial_state, config)
