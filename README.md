@@ -18,6 +18,10 @@ Streamlit client - `streamlit run client-streamlit.py`
 
 Optionally run `langgraph dev` for the langgraph server
 
+### Demo Video 
+
+https://drive.google.com/file/d/1bATh-70rTLWpCQ6wsbGpnnghDXYc8YS0/view?usp=drive_link
+
 ### References
 
 https://github.com/esurovtsev/langgraph-intro/blob/main/18_user_profiles.ipynb
