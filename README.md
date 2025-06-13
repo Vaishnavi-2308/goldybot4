@@ -10,7 +10,7 @@ Clone the repository and run `uv sync`.
 
 Run the ollama server first - `ollama serve`
 
-Pull the LLM - `ollama pull qwen3:1.7b`
+Pull the LLM - `ollama pull qwen3:1.7b` and `ollama pull nomic-embed-text`.
 
 server - `uvicorn server:app --reload`
 

@@ -12,10 +12,10 @@ import uuid
 from dotenv import load_dotenv
 
 # Core dependencies
-from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
+from langchain_core.messages import HumanMessage #, AIMessage, SystemMessage
 from langchain_core.documents import Document
-from langchain_core.embeddings import Embeddings
-from langchain_core.vectorstores import VectorStore
+# from langchain_core.embeddings import Embeddings
+# from langchain_core.vectorstores import VectorStore
 from langchain_ollama import OllamaEmbeddings, ChatOllama
 from langchain_community.tools import DuckDuckGoSearchRun
 from langchain_chroma import Chroma
